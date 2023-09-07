@@ -14,10 +14,12 @@ interface IState{
         section : string,
         destination : string,
     },
+    
 }
 
 const Section : React.FC<IProps> = ({section, setSection}) => {
     const [cardsList,setCardsList] = useState<IState['card'][]>([])
+    const [currentSectionName,setCurrentSectionName] = useState<string>("")
 
 
 
@@ -36,6 +38,7 @@ const Section : React.FC<IProps> = ({section, setSection}) => {
                 destination
 
             }))
+            setCurrentSectionName(data.name)
             console.log('cards_list',cards_list)
             setCardsList(cards_list)
             console.log("cardslist state",cardsList)
@@ -44,8 +47,33 @@ const Section : React.FC<IProps> = ({section, setSection}) => {
         }
         getCurrentSection();
     },[section])
+    const handleMove= () =>{
+
+    }
+
+    const renderList = () : JSX.Element[] => {
+        return cardsList.map((card : IState['card']) => {
+            return (<li onClick={()=>{
+                if(card.destination.startsWith("sections")){
+                    setSection({url : card.destination})
+                }else if(card.destination.startsWith("article")){
+                    //todo handle the case for article
+                }
+                //todo handle the case for error 
+
+            }} key={card.url}>
+                {card.name}
+
+            </li>)
+
+        })
+
+    }
 
     return (<div>
+        <div className="Title">{currentSectionName}</div>
+        <ul>{renderList()}</ul>
+        
     </div>)
 }
 
