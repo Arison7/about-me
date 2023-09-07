@@ -14,12 +14,13 @@ export interface IState{
 
 function App() {
   //initializing states
-  const [section,setSection] = useState<IState['section']>({url:"sections/1"})
+  //TODO: make default section
+  const [section,setSection] = useState<IState['section']>({url:"sections/2"})
 
 
   return (
     <div className="App">
-      <Section section = {section}/>
+      <Section section = {section} setSection = {setSection}/>
     </div>
   );
 }

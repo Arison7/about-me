@@ -5,28 +5,42 @@ import Cookies from "js-cookie"
 
 interface IProps{
     section: Props['section']
+    setSection: React.Dispatch<React.SetStateAction<IProps['section']>>
 }
 interface IState{
-    currentSection:{
-        name: string,
-    }
+    card:{
+        url : string,
+        name : string,
+        section : string,
+        destination : string,
+    },
 }
 
-const Section : React.FC<IProps> = ({section}) => {
+const Section : React.FC<IProps> = ({section, setSection}) => {
+    const [cardsList,setCardsList] = useState<IState['card'][]>([])
 
 
 
     useEffect(()=>{
         console.log("hi")
 
-        const loc = window.location.protocol
-        const path = loc + section.url
 
         const getCurrentSection = async() => {
-            const res = await fetch(path)
-            console.log(res)
+            console.log("currentSectionPath",section.url)
+            const res = await fetch(section.url )
             const data = await res.json(); 
-            console.log("data",data)
+            const cards_list = data.cards_list.map(({url,name,section,destination}:any)=>({
+                url,
+                name,
+                section,
+                destination
+
+            }))
+            console.log('cards_list',cards_list)
+            setCardsList(cards_list)
+            console.log("cardslist state",cardsList)
+            console.log('data',data)
+
         }
         getCurrentSection();
     },[section])

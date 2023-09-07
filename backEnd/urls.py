@@ -9,6 +9,7 @@ from main import views
 router = routers.DefaultRouter()
 router.register(r'cards', views.CardViewSet)
 router.register(r'sections', views.SectionViewSet)
+router.register(r'articles', views.ArticleViewSet)
 
 
 
