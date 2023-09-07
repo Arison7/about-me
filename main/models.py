@@ -17,4 +17,16 @@ TODO: add url going from the card
 """
 class Card(models.Model):
     name = models.TextField()
+    is_leaf = models.BooleanField(default=False)
     section = models.ForeignKey('Section',on_delete=models.CASCADE)
+    nextSection = models.ForeignKey('Section',on_delete=models.CASCADE,null=True,default=None,related_name="next")
+    article = models.ForeignKey('Article',on_delete=models.CASCADE,null=True,default=None)
+
+class Article(models.Model):
+    name = models.TextField()
+
+    
+
+
+
+

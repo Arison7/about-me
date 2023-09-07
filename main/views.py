@@ -9,7 +9,7 @@ class CardViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Cards to be view
     """
-    queryset = Card.objects.all().order_by('-date_joined')
+    queryset = Card.objects.all()
     serializer_class = CardSerializer
 
 
