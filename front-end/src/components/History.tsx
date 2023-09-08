@@ -1,14 +1,15 @@
 import React, {useState} from 'react'
-import { IState } from '../App'
+import { IState as Props} from '../App'
 
 interface IProps{
     historyList: string[],
-    setSection: React.Dispatch<React.SetStateAction<IState['section']>>
+    setSection: React.Dispatch<React.SetStateAction<Props['section']>>
     setHistoryList: React.Dispatch<React.SetStateAction<string[]>>
+    setArticle : React.Dispatch<React.SetStateAction<Props['article']>>
 }
 
 
-const History : React.FC<IProps> = ({historyList,setHistoryList,setSection}) => {
+const History : React.FC<IProps> = ({historyList,setHistoryList,setSection,setArticle}) => {
 
 
 
@@ -18,6 +19,7 @@ const History : React.FC<IProps> = ({historyList,setHistoryList,setSection}) => 
             return (<div key={section} onClick={()=>{
                 setSection({url : historyList[i]});
                 setHistoryList(historyList.slice(0,i));
+                setArticle({url : ""});
             }}>
                 {section}
             </div >)

@@ -2,9 +2,9 @@ from django.shortcuts import render
 from main.models import Section, Card, Article
 from rest_framework import viewsets
 from rest_framework import permissions
-from main.serializers import SectionSerializer, CardSerializer
+from main.serializers import SectionSerializer, CardSerializer, ArticleSerializer
 
-
+#todo take care of permissions 
 class CardViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Cards to be view
@@ -26,7 +26,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
     API endpoint that allows Articles to be viewed or edited.
     """
     queryset = Article.objects.all()
-    serializer_class = SectionSerializer
+    serializer_class = ArticleSerializer
 
 
 
