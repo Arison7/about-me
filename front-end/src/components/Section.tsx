@@ -6,6 +6,7 @@ import Cookies from "js-cookie"
 interface IProps{
     section: Props['section']
     setSection: React.Dispatch<React.SetStateAction<IProps['section']>>
+    setHistoryList: React.Dispatch<React.SetStateAction<string[]>>
 }
 interface IState{
     card:{
@@ -17,7 +18,7 @@ interface IState{
     
 }
 
-const Section : React.FC<IProps> = ({section, setSection}) => {
+const Section : React.FC<IProps> = ({section, setSection, setHistoryList}) => {
     const [cardsList,setCardsList] = useState<IState['card'][]>([])
     const [currentSectionName,setCurrentSectionName] = useState<string>("")
 
@@ -47,15 +48,17 @@ const Section : React.FC<IProps> = ({section, setSection}) => {
         }
         getCurrentSection();
     },[section])
-    const handleMove= () =>{
-
-    }
 
     const renderList = () : JSX.Element[] => {
         return cardsList.map((card : IState['card']) => {
             return (<li onClick={()=>{
                 if(card.destination.startsWith("sections")){
                     setSection({url : card.destination})
+                    setHistoryList((historyList)=>{
+                        historyList.push(card.destination);
+                        return historyList;
+                    })
+
                 }else if(card.destination.startsWith("article")){
                     //todo handle the case for article
                 }
