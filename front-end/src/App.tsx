@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './style/app.css';
 import Section from './components/Section';
+import History from './components/History';
 
 export interface IState{
   section : {
@@ -22,7 +23,9 @@ function App() {
 
   return (
     <div className="App">
+      <History historyList= {historyList} setSection= {setSection} setHistoryList= {setHistoryList}/>
       <Section section = {section} setSection = {setSection} setHistoryList = {setHistoryList}/>
+
     </div>
   );
 }

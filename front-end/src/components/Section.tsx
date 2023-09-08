@@ -25,7 +25,6 @@ const Section : React.FC<IProps> = ({section, setSection, setHistoryList}) => {
 
 
     useEffect(()=>{
-        console.log("hi")
 
 
         const getCurrentSection = async() => {
@@ -40,10 +39,7 @@ const Section : React.FC<IProps> = ({section, setSection, setHistoryList}) => {
 
             }))
             setCurrentSectionName(data.name)
-            console.log('cards_list',cards_list)
             setCardsList(cards_list)
-            console.log("cardslist state",cardsList)
-            console.log('data',data)
 
         }
         getCurrentSection();
@@ -53,11 +49,17 @@ const Section : React.FC<IProps> = ({section, setSection, setHistoryList}) => {
         return cardsList.map((card : IState['card']) => {
             return (<li onClick={()=>{
                 if(card.destination.startsWith("sections")){
-                    setSection({url : card.destination})
                     setHistoryList((historyList)=>{
-                        historyList.push(card.destination);
+                        //format url to remove host and protocol so it can be filled automatically
+                        let origin = card.section.split('/').splice(3).join('/')
+                        //console.log('formated destination',destination)
+                        historyList.push(origin);
+                        console.log('origin',historyList)
+                        
                         return historyList;
                     })
+                    setSection({url : card.destination})
+
 
                 }else if(card.destination.startsWith("article")){
                     //todo handle the case for article

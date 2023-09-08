@@ -27,9 +27,11 @@ class Card(models.Model):
 
 class Article(models.Model):
     name = models.TextField()
+    content = models.TextField()
+
+
     def __str__(self):
         return self.name
-    
 
 
 
