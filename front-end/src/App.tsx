@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './style/app.css';
 import Section from './components/Section';
 import History from './components/History';
@@ -20,9 +20,23 @@ export interface IState{
 function App() {
   //initializing states
   //TODO: make default section
-  const [section,setSection] = useState<IState['section']>({url:"sections/2"})
+  const [section,setSection] = useState<IState['section']>({url:""})
   const [historyList,setHistoryList] = useState<IState['historyList']>([])
   const [article,setArticle] = useState<IState['article']>({url:""})
+
+  useEffect(()=>{
+    const getDefualt = async () => {
+      const respond = await fetch('sections/default/');
+      const data = await respond.json()
+      console.log(data)
+      setSection({url : data.url}) 
+    }
+    getDefualt()
+
+  },[])
+
+
+
 
   const renderParticles = () : JSX.Element[] => {
     let elemnets : JSX.Element[] = [];

@@ -6,7 +6,7 @@ class CardSerializer(serializers.HyperlinkedModelSerializer):
     destination = serializers.SerializerMethodField(read_only = True)
     class Meta:
         model = Card
-        fields = ['url', 'name','section','destination','nextSection','article']
+        fields = ['url', 'name','description','section','destination','nextSection','article','image']
         extra_kwargs = {
             'nextSection': {'write_only': True},
             'article': {'write_only':True}
@@ -28,7 +28,12 @@ class SectionSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Section
-        fields = ['url', 'name','cards_list']
+        fields = ['url', 'name','cards_list','is_defualt']
+        extra_kwargs = {
+            "is_defualt" : {"write_only" : True}
+
+        }
+
 
 class ArticleSerializer(serializers.HyperlinkedModelSerializer):
 
