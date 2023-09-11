@@ -63,7 +63,7 @@ const Section : React.FC<IProps> = ({section, setSection, setHistoryList, setArt
 
     const renderList = () : JSX.Element[] => {
         return cardsList.map((card : IState['card']) => {
-            return (<li onClick={()=>{
+            return (<li className="card" onClick={()=>{
                 if(card.destination.startsWith("sections") ){
                     updateHistory(card)
                     setSection({url : card.destination})
@@ -79,7 +79,15 @@ const Section : React.FC<IProps> = ({section, setSection, setHistoryList, setArt
                 }
 
             }} key={card.url}>
-                {card.name}
+                <img 
+                    src="https://images.unsplash.com/photo-1656618020911-1c7a937175fd?crop=entropy
+                    &cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTc1MzQyNTE&i
+                    xlib=rb-1.2.1&q=80">
+                </img>
+
+                <div className="card-content"></div>
+                <h2>{card.name}</h2>
+                <p>description</p>
 
             </li>)
 
@@ -87,9 +95,9 @@ const Section : React.FC<IProps> = ({section, setSection, setHistoryList, setArt
 
     }
 
-    return (<div>
-        <div className="Title">{currentSectionName}</div>
-        <ul>{renderList()}</ul>
+    return (<div className="section">
+        <div className="title">{currentSectionName}</div>
+        <ul className="cards-list">{renderList()}</ul>
         
     </div>)
 }

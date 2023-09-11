@@ -28,9 +28,9 @@ const History : React.FC<IProps> = ({historyList,setHistoryList,setSection,setAr
 
         })
     }
-    return (<div>
+    return (<nav id="history">
         {renderList()}
-    </div>)
+    </nav>)
 
 
 

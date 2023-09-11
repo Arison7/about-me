@@ -26,7 +26,7 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div id="app">
       <History historyList= {historyList} setSection= {setSection} setHistoryList= {setHistoryList} setArticle = {setArticle}/>
       <Section section = {section} setSection = {setSection} setHistoryList = {setHistoryList} setArticle = {setArticle}/>
       <Article article = {article}/>
