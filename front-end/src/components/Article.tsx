@@ -48,7 +48,7 @@ const Article : React.FC<IProps> = ({article}) => {
     },[article.url])
 
     //todo support images
-    return (<div>
+    return (<div className='article-container'>
         <p>{currentArticle.name}</p>
         <ReactMarkdown>{currentArticle.content}</ReactMarkdown>
     </div>)

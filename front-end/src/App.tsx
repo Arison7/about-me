@@ -24,9 +24,23 @@ function App() {
   const [historyList,setHistoryList] = useState<IState['historyList']>([])
   const [article,setArticle] = useState<IState['article']>({url:""})
 
+  const renderParticles = () : JSX.Element[] => {
+    let elemnets : JSX.Element[] = [];
+    for(let i :number = 0 ; i <= 
+      50; i++ ){
+      elemnets.push(<div className='circle-container'>
+          <div className='circle'></div>
+        </div>)
+    }
+    return elemnets
+
+  }
 
   return (
-    <div id="app">
+    <div id="app" >
+      <div className='container'>
+        {renderParticles()}
+      </div>
       <History historyList= {historyList} setSection= {setSection} setHistoryList= {setHistoryList} setArticle = {setArticle}/>
       <Section section = {section} setSection = {setSection} setHistoryList = {setHistoryList} setArticle = {setArticle}/>
       <Article article = {article}/>
