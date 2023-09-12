@@ -19,30 +19,27 @@ interface IState{
 }
 
 const Article : React.FC<IProps> = ({article}) => {
-    //* luck of url indicates that applications is showcasing section
-    //* so we can return without rendering anything 
+    //luck of url indicates that applications is showcasing section
+    //so we can return without rendering anything 
     if(!article.url)
         return (<div></div>)
-    //*creating state that holds date of article after it's fetching
+    //creates state that holds date of article after it's fetching
     const [currentArticle,setCurrentArticle] = useState<IState['currentArticle']> ({
         name : "",
         content: ""
     })
 
-    
     useEffect(()=>{
-        
-        //*fetching data of article based on url received in props
+        //fetches data of article based on url received in props
         const getCurrentArticle = async() => {
             const res = await fetch(article.url)
             const data = await res.json(); 
             
-            //*updating current Article with the data received
+            //updates current Article with the data received
             setCurrentArticle({
                 name : data.name,
                 content: data.content
             })
-
         }
         getCurrentArticle();
     },[article.url])
@@ -53,10 +50,6 @@ const Article : React.FC<IProps> = ({article}) => {
         <ReactMarkdown>{currentArticle.content}</ReactMarkdown>
     </div>)
 
-
-
 }
-
-
 
 export default Article

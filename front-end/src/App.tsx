@@ -8,7 +8,11 @@ export interface IState{
   section : {
     url : string
   },
-  historyList : string[],
+  historyList : {
+    url : string,
+    name: string,
+    image: string,
+  }[],
   article :{
     url : string
   }
@@ -26,7 +30,7 @@ function App() {
 
   useEffect(()=>{
     const getDefualt = async () => {
-      const respond = await fetch('sections/default/');
+      const respond = await fetch('api/sections/default/');
       const data = await respond.json()
       console.log(data)
       setSection({url : data.url}) 

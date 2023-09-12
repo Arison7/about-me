@@ -7,13 +7,17 @@ from rest_framework.response import Response
 from main.serializers import SectionSerializer, CardSerializer, ArticleSerializer
 
 
-#todo take care of permissions 
+#todo take care of permissions  
 class CardViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Cards to be view
     """
     queryset = Card.objects.all()
     serializer_class = CardSerializer
+
+    def perform_create(self, serializer):
+        serializer.validated_data['image'] = 'static/' + serializer.validated_data['image']
+        serializer.save()
 
 
 class SectionViewSet(viewsets.ModelViewSet):
@@ -41,4 +45,6 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
 
 
-
+#renders react's app
+def mainWindowView(request):
+    return render(request, 'index.html')

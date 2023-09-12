@@ -22,6 +22,7 @@ router.register(r'articles', views.ArticleViewSet)
 #*including the api routers in the urls
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
+    path('', views.mainWindowView, name='mainWindow'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

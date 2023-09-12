@@ -19,7 +19,7 @@ class Section(models.Model):
 class Card(models.Model):
     name = models.TextField()
     description = models.TextField()
-    image = models.ImageField()
+    image = models.TextField()
     section = models.ForeignKey('Section',on_delete=models.CASCADE, related_name="cards_list")
     nextSection = models.ForeignKey('Section',on_delete=models.CASCADE,null=True,default=None,related_name="next")
     article = models.ForeignKey('Article',on_delete=models.CASCADE,null=True,default=None)

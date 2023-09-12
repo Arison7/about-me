@@ -24,7 +24,13 @@ html, body, #root, #app, .section
 
 .title 
     position: absolute
-    top: 0
+    top: 2%
+    color: white
+    font-family: Roboto
+    font-weight: bold
+    font-size: 2rem
+    text-transform: capitalize
+
 
 .section
     display: flex
@@ -33,13 +39,16 @@ html, body, #root, #app, .section
     justify-content: center
 
 .cards-list
+    position: absolute
+    top: 20%
     width:100%
+    padding: 0 5%
+    list-style: none
     display: flex
     flex-direction: row
-    justify-content: space-between
-    list-style: none
-    padding-left: 10%
-    padding-right: 10%
+    flex-wrap: wrap
+    gap: 50px
+    justify-content: space-around
 .card
     width: 12rem
     height: 24rem
@@ -89,6 +98,7 @@ html, body, #root, #app, .section
 .container
     position: absolute
     z-index: -100
+    overflow: hidden
 
 .history-card
     position: inherit
