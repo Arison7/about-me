@@ -41,7 +41,7 @@ function App() {
 
 
 
-
+/*
   const renderParticles = () : JSX.Element[] => {
     let elemnets : JSX.Element[] = [];
     for(let i :number = 0 ; i <= 
@@ -53,12 +53,10 @@ function App() {
     return elemnets
 
   }
+  */
 
   return (
     <div id="app" >
-      <div className='container'>
-        {renderParticles()}
-      </div>
       <History historyList= {historyList} setSection= {setSection} setHistoryList= {setHistoryList} setArticle = {setArticle}/>
       <Section section = {section} setSection = {setSection} setHistoryList = {setHistoryList} setArticle = {setArticle}/>
       <Article article = {article}/>
