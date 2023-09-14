@@ -45,10 +45,19 @@ const Article : React.FC<IProps> = ({article}) => {
     },[article.url])
 
     //todo support images
-    return (<div className='article-container'>
-        <p>{currentArticle.name}</p>
-        <ReactMarkdown>{currentArticle.content}</ReactMarkdown>
-    </div>)
+    //! awful solution and only temporary one till i do my own markdown translator
+    if(currentArticle.name === "Dashboard"){
+        return (<div className='article-container'>
+            <h1 className='title-article'>{currentArticle.name}</h1>
+            <div dangerouslySetInnerHTML={{ __html: currentArticle.content }} />
+        </div>)
+    }else{
+        return (<div className='article-container'>
+            <h1 className='title-article'>{currentArticle.name}</h1>
+            <ReactMarkdown>{currentArticle.content}</ReactMarkdown>
+        </div>)
+
+    }
 
 }
 

@@ -16,6 +16,7 @@ const InfoPopUp: React.FC<InfoPopupProps> = ({ x, y, text }) => {
 		color: 'white',
 		padding: '8px',
 		borderRadius: '4px',
+		zIndex: 100,
 	};
 
 	return (

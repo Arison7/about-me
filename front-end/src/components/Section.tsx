@@ -107,6 +107,7 @@ const Section : React.FC<IProps> = ({section, setSection, setHistoryList, setArt
                     console.error("Card's destination is invalid: ", card.destination)
                 }
             }} key={card.url}>
+                <div className="shadow"></div>
                 <img src={card.image}></img>
                 <div className="card-content"></div>
                 <h2>{card.name}</h2>
