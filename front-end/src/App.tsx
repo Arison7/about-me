@@ -3,6 +3,7 @@ import './style/app.css';
 import Section from './components/Section';
 import History from './components/History';
 import Article from './components/Article';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 export interface IState{
   section : {
@@ -23,7 +24,6 @@ export interface IState{
 
 function App() {
   //initializing states
-  //TODO: make default section
   const [section,setSection] = useState<IState['section']>({url:""})
   const [historyList,setHistoryList] = useState<IState['historyList']>([])
   const [article,setArticle] = useState<IState['article']>({url:""})
@@ -56,11 +56,15 @@ function App() {
   */
 
   return (
-    <div id="app" >
-      <History historyList= {historyList} setSection= {setSection} setHistoryList= {setHistoryList} setArticle = {setArticle}/>
-      <Section section = {section} setSection = {setSection} setHistoryList = {setHistoryList} setArticle = {setArticle}/>
-      <Article article = {article}/>
-    </div>
+	<div id="app" >
+		<BrowserRouter>
+			<Routes>	
+				<History historyList= {historyList} setSection= {setSection} setHistoryList= {setHistoryList} setArticle = {setArticle}/>
+				<Section section = {section} setSection = {setSection} setHistoryList = {setHistoryList} setArticle = {setArticle}/>
+				<Article article = {article}/>
+			</Routes>
+		</BrowserRouter>
+	</div>
   );
 }
 
