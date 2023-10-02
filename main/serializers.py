@@ -14,9 +14,9 @@ class CardSerializer(serializers.HyperlinkedModelSerializer):
         
     def get_destination(self,obj):
         if (obj.article != None):
-            return f'api/articles/{obj.article.id}' 
+            return f'/articles/{obj.article.id}' 
         if (obj.nextSection != None):
-            return f'api/sections/{obj.nextSection.id}'
+            return f'/sections/{obj.nextSection.id}'
         #&edge case scenario technically should never occour. 
         #&Only possible if the was a mistake during model creation.
         return None

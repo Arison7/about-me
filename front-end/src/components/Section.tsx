@@ -1,11 +1,12 @@
 import React, {useEffect,useState} from "react";
 import {IState as Props} from "../App";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 interface IProps{
-    section: Props['section'],
-    setSection: React.Dispatch<React.SetStateAction<IProps['section']>>,
+    //section: Props['section'],
+   // setSection: React.Dispatch<React.SetStateAction<IProps['section']>>,
     setHistoryList: React.Dispatch<React.SetStateAction<Props['historyList']>>,
-    setArticle : React.Dispatch<React.SetStateAction<Props['article']>>
+    //setArticle : React.Dispatch<React.SetStateAction<Props['article']>>
 }
 interface IState{
     card:{
@@ -19,11 +20,16 @@ interface IState{
     
 }
 
-const Section : React.FC<IProps> = ({section, setSection, setHistoryList, setArticle}) => {
+const Section : React.FC<IProps> = ( {setHistoryList}) => {
     //if the url isn't present we can just return
     //should occur while Article component is being displayed
-    if(!section.url)
+
+    const { pk }= useParams()
+
+    if(!pk)
         return (<div></div>)
+
+    const navigate = useNavigate()
 
 
     //holds data of all the cards of current section
@@ -41,7 +47,7 @@ const Section : React.FC<IProps> = ({section, setSection, setHistoryList, setArt
             ?this works because in development all requests are proxied to API
             ?and in production react is hosted in template thus is on the same host as API
             */ 
-            const res = await fetch(section.url)
+            const res = await fetch('/api/sections/' + pk + '/')
             const data = await res.json(); 
             //maps data to desired format
             //!since data is fetched without types assertion the whole operation
@@ -62,7 +68,7 @@ const Section : React.FC<IProps> = ({section, setSection, setHistoryList, setArt
         }
         getCurrentSection();
 
-    },[section])
+    },[pk])
 
     //*updates history list to include data of current card
     const updateHistory = (card : IState['card']) : void => {
@@ -86,29 +92,31 @@ const Section : React.FC<IProps> = ({section, setSection, setHistoryList, setArt
         //maps each card to a li element with unique data and onClick function
         return cardsList.map((card : IState['card']) => {
             return (<li className="card" onClick={()=>{
-                if(card.destination.startsWith("api/sections") ){
+                if(card.destination.startsWith("/sections") ){
                     //adds current section to history
                     updateHistory(card)
                     //moves to next sections
-                    setSection({url : card.destination})
+                    navigate(card.destination)
+                    //setSection({url : card.destination})
 
-                }else if(card.destination.startsWith("api/article")){
+                }else if(card.destination.startsWith("/articles")){
                     //adds current section to history
                     updateHistory(card)
                     //sets section to nothing to remove it from display
-                    setSection({url : ""})
+                    //setSection({url : ""})
+                    navigate(card.destination)
                     //sets article to it's url for it to be display
-                    setArticle({url : card.destination})
+                    //setArticle({url : card.destination})
 
                 }else{
                     //if card's destination doesn't follow any of the patterns it's probably
                     //cause of error while inputing data in the model and should be displayed
                     //to the user
-                    console.error("Card's destination is invalid: ", card.destination)
+                    console.error("Card's destination is invalid:", card.destination)
                 }
             }} key={card.url}>
                 <div className="shadow"></div>
-                <img src={card.image}></img>
+                <img src={'/'+card.image}></img>
                 <div className="card-content"></div>
                 <h2>{card.name}</h2>
                 <p>{card.description}</p>

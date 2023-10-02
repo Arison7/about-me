@@ -1,17 +1,21 @@
 import React, {useState} from 'react'
 import { IState as Props} from '../App'
 import InfoPopUp from './InfoPopUp'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 interface IProps{
     historyList: Props['historyList'],
-    setSection: React.Dispatch<React.SetStateAction<Props['section']>>
+    //setSection: React.Dispatch<React.SetStateAction<Props['section']>>
     setHistoryList: React.Dispatch<React.SetStateAction<Props['historyList']>>
-    setArticle : React.Dispatch<React.SetStateAction<Props['article']>>
+    //setArticle : React.Dispatch<React.SetStateAction<Props['article']>>
 }
 
 
 
-const History : React.FC<IProps> = ({historyList,setHistoryList,setSection,setArticle}) => {
+const History : React.FC<IProps> = ({historyList,setHistoryList}) => {
+    const navigate = useNavigate()
+
+
     //kept in order to display InfoPopUp
     const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
     //string to be displayed in the InfoPopUp or nothing if the InfoPopUp isn't visible 
@@ -30,11 +34,12 @@ const History : React.FC<IProps> = ({historyList,setHistoryList,setSection,setAr
     };
     const handleClick = (i : number) => {
         //set sections to the one saved at the index
-        setSection({url : historyList[i].url});
+        //setSection({url : historyList[i].url});
+        navigate(historyList[i].url)
         //updates history list to remove everything past and inclusive to i index
         setHistoryList(historyList.slice(0,i));
         //hides article if one was opened 
-        setArticle({url : ""});
+        //setArticle({url : ""});
         //hides InfoPopUp
         setHoveredObject(null);
     }
@@ -61,7 +66,6 @@ const History : React.FC<IProps> = ({historyList,setHistoryList,setSection,setAr
             hoveredObject && 
             (<InfoPopUp x={mousePosition.x} y={mousePosition.y} text={hoveredObject} />)
         }
-
     </nav>)
 
 
