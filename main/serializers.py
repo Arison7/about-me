@@ -34,6 +34,14 @@ class SectionSerializer(serializers.HyperlinkedModelSerializer):
 
         }
 
+class SectionInfoSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Section
+        fields = ['pk','url', 'name']
+
+
+
+
 
 class ArticleSerializer(serializers.HyperlinkedModelSerializer):
 

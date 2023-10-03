@@ -36,7 +36,7 @@ const Article : React.FC = () => {
     useEffect(()=>{
         //fetches data of article based on url received in props
         const getCurrentArticle = async() => {
-            const res = await fetch('/articles/' + pk + '/')
+            const res = await fetch('/api/articles/' + pk + '/')
             const data = await res.json(); 
             
             //updates current Article with the data received

@@ -56,7 +56,7 @@ const History : React.FC<IProps> = ({historyList,setHistoryList}) => {
                 onMouseMove={(e) => handleMouseHover(e,instance.name)}
                 onMouseLeave={handleMouseLeave}
             >
-                <img src={instance.image}></img>
+                <img src={"/" + instance.image}></img>
             </div >)
         })
     }
