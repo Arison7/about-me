@@ -2,8 +2,18 @@ from rest_framework import serializers
 from main.models import Section, Card, Article
 
 
+
+
+
+class SectionInfoSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Section
+        fields = ['url','pk','name']
+        
+
 class CardSerializer(serializers.HyperlinkedModelSerializer):
     destination = serializers.SerializerMethodField(read_only = True)
+    section = SectionInfoSerializer(read_only = True)
     class Meta:
         model = Card
         fields = ['url', 'name','description','section','destination','nextSection','article','image']
@@ -33,12 +43,6 @@ class SectionSerializer(serializers.HyperlinkedModelSerializer):
             "is_defualt" : {"write_only" : True}
 
         }
-
-class SectionInfoSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Section
-        fields = ['pk','url', 'name']
-
 
 
 

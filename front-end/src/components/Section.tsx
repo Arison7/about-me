@@ -13,7 +13,11 @@ interface IState{
         url : string,
         name : string,
         description: string,
-        section : string,
+        section : {
+            url : string,
+            pk : number,
+            name : string
+        },
         destination : string,
         image: string
     },
@@ -74,13 +78,13 @@ const Section : React.FC<IProps> = ( {setHistoryList}) => {
     const updateHistory = (card : IState['card']) : void => {
         setHistoryList((historyList)=>{
             //format url to remove host and protocol so it can be filled automatically
-            let origin = card.section.split('/').splice(4).join('/')
+            let origin = "/sections/" + card.section.pk 
             
             //push all the necessary data for History compoment
             //todo change name to title of the section 
             historyList.push({
                 url: origin,
-                name: card.name,
+                name: card.section.name,
                 image: card.image
             });
             

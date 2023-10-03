@@ -8,6 +8,7 @@ from django.db import models
 """
 class Section(models.Model):
     name = models.TextField()
+    origin = models.ForeignKey('Card',on_delete=models.SET_NULL, null=True, related_name="section_destination")
     is_defualt = models.BooleanField()
     def __str__(self):
         return self.name
@@ -23,11 +24,12 @@ class Card(models.Model):
     section = models.ForeignKey('Section',on_delete=models.CASCADE, related_name="cards_list")
     nextSection = models.ForeignKey('Section',on_delete=models.CASCADE,null=True,default=None,related_name="next")
     article = models.ForeignKey('Article',on_delete=models.CASCADE,null=True,default=None)
-    def __str__(self,obj):
+    def __str__(self):
         return self.name
 
 class Article(models.Model):
     name = models.TextField()
+    origin = models.ForeignKey('Card',on_delete=models.SET_NULL, null=True, related_name='article_destination')
     content = models.TextField()
 
 
