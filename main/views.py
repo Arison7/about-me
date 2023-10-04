@@ -7,6 +7,10 @@ from rest_framework.response import Response
 from main.serializers import SectionSerializer, CardSerializer, ArticleSerializer
 
 
+
+
+
+
 #todo take care of permissions  
 class CardViewSet(viewsets.ModelViewSet):
     """
@@ -31,18 +35,40 @@ class SectionViewSet(viewsets.ModelViewSet):
     def get_default(self, request, *args, **kwargs):
         serializer = self.get_serializer( Section.objects.filter(is_defualt=True)[0])
         return Response(serializer.data)
-
     
 
 
-
+    @action(detail=True, methods=['GET'],url_path="history")
+    def get_history(self,request,*args,**kwargs):
+        return build_history(self,request,*args,**kwargs)
+        
 class ArticleViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows Articles to be viewed or edited.
     """
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+    @action(detail=True, methods=['GET'],url_path="history")
+    def get_history(self,request,*args,**kwargs):
+        return build_history(self,request,*args,**kwargs)
 
+def build_history(self,request,*args,**kwargs):
+    history = []
+    obj = self.get_object()
+    recursive_history(obj.origin,history,request)
+    #data = json.dumps(history)
+    return Response(reversed(history))
+
+def recursive_history(card,history,request):
+    if card == None:
+        return
+    card_data = CardSerializer(card,context={'request': request}).data
+    history.append({
+        "url" :card_data['url'],
+        "name" : card_data['section']['name'],
+        "image" : card_data['image'],
+    }) 
+    recursive_history(card.section.origin,history,request)
 
 
 #renders react's app

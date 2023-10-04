@@ -38,7 +38,7 @@ class SectionSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Section
-        fields = ['url', 'name','cards_list','is_defualt']
+        fields = ['url', 'name','origin','cards_list','is_defualt']
         extra_kwargs = {
             "is_defualt" : {"write_only" : True}
 
@@ -51,7 +51,7 @@ class ArticleSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Article
-        fields = ['url','name','content']
+        fields = ['url','name','origin','content']
 
         
 

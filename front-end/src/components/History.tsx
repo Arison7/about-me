@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState,useMemo} from 'react'
 import { IState as Props} from '../App'
 import InfoPopUp from './InfoPopUp'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 interface IProps{
     historyList: Props['historyList'],
@@ -12,9 +12,30 @@ interface IProps{
 
 
 
+
+const reBuildHistory = async (setHistoryList : React.Dispatch<React.SetStateAction<IProps['historyList']>>) : Promise<void> => {
+    console.log("rebuilding history", window.location.pathname);
+    const getSection = async () => {
+        const res = await fetch("/api" + window.location.pathname)
+        const data = await res.json()
+        console.log(data)
+        
+        
+    }
+    await getSection()
+
+
+
+
+}
+
 const History : React.FC<IProps> = ({historyList,setHistoryList}) => {
     const navigate = useNavigate()
 
+
+	useMemo(()=>{
+		addEventListener("popstate", () => {reBuildHistory(setHistoryList)});
+	},[])
 
     //kept in order to display InfoPopUp
     const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -51,7 +72,7 @@ const History : React.FC<IProps> = ({historyList,setHistoryList}) => {
         return historyList.map((instance,i)=>{
             //each cards holds its own index to historyList
             return (<div className='history-card card' key={instance.url} 
-                style={{top:15 *i + "px", left: 15* i +"px"}}
+                style={{top:15 *i + "px", left: 15* i +"px", zIndex: i}}
                 onClick={(e) => handleClick(i)}
                 onMouseMove={(e) => handleMouseHover(e,instance.name)}
                 onMouseLeave={handleMouseLeave}

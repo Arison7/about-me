@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./style/app.css";
 import Section from "./components/Section";
 import History from "./components/History";
@@ -6,24 +6,33 @@ import Article from "./components/Article";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 
 export interface IState {
+	/*
 	section: {
 		url: string;
 	};
+	*/
 	historyList: {
 		url: string;
 		name: string;
 		image: string;
 	}[];
+	/*
 	article: {
 		url: string;
 	};
+	*/
 }
+
+
+
 
 function App() {
 	//initializing states
 	//const [section, setSection] = useState<IState["section"]>({ url: "" });
 	const [historyList, setHistoryList] = useState<IState["historyList"]>([]);
 	//const [article, setArticle] = useState<IState["article"]>({ url: "" });
+
+
 
 	const navigate = useNavigate();
 	useEffect(() => {
