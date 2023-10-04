@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from "react";
+import React, { useEffect,useState} from "react";
 import {IState as Props} from "../App";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 
@@ -25,16 +25,17 @@ interface IState{
 }
 
 const Section : React.FC<IProps> = ( {setHistoryList}) => {
-    //if the url isn't present we can just return
-    //should occur while Article component is being displayed
-
+    
+    //get pk paramenter from the path
     const { pk }= useParams()
 
-    if(!pk)
-        return (<div></div>)
-
+	//React-router-dom function that allows navigating between routes
     const navigate = useNavigate()
 
+    if(!pk){
+        navigate("/")
+        return (<div></div>)
+    }
 
     //holds data of all the cards of current section
     const [cardsList,setCardsList] = useState<IState['card'][]>([])
@@ -86,7 +87,6 @@ const Section : React.FC<IProps> = ( {setHistoryList}) => {
             let origin = "/sections/" + card.section.pk 
             
             //push all the necessary data for History compoment
-            //todo change name to title of the section 
             historyList.push({
                 url: origin,
                 name: card.section.name,
@@ -102,28 +102,10 @@ const Section : React.FC<IProps> = ( {setHistoryList}) => {
         //maps each card to a li element with unique data and onClick function
         return cardsList.map((card : IState['card']) => {
             return (<li className="card" onClick={()=>{
-                if(card.destination.startsWith("/sections") ){
-                    //adds current section to history
-                    updateHistory(card)
-                    //moves to next sections
-                    navigate(card.destination)
-                    //setSection({url : card.destination})
-
-                }else if(card.destination.startsWith("/articles")){
-                    //adds current section to history
-                    updateHistory(card)
-                    //sets section to nothing to remove it from display
-                    //setSection({url : ""})
-                    navigate(card.destination)
-                    //sets article to it's url for it to be display
-                    //setArticle({url : card.destination})
-
-                }else{
-                    //if card's destination doesn't follow any of the patterns it's probably
-                    //cause of error while inputing data in the model and should be displayed
-                    //to the user
-                    console.error("Card's destination is invalid:", card.destination)
-                }
+                //updates history to include the current card
+                updateHistory(card)
+                //moves to next section/article
+                navigate(card.destination)
             }} key={card.url}>
                 <div className="shadow"></div>
                 <img src={'/'+card.image}></img>
@@ -140,7 +122,7 @@ const Section : React.FC<IProps> = ( {setHistoryList}) => {
     </div>)
 }
 
-export default Section
+export default Section;
 
 
 
