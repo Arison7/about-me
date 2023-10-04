@@ -64,7 +64,7 @@ def recursive_history(card,history,request):
         return
     card_data = CardSerializer(card,context={'request': request}).data
     history.append({
-        "url" :card_data['url'],
+        "url" : "/sections/" + str(card_data['section']['pk']),
         "name" : card_data['section']['name'],
         "image" : card_data['image'],
     }) 
