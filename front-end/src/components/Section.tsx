@@ -81,7 +81,6 @@ const Section : React.FC<IProps> = ( {setHistoryList}) => {
             let origin = "/sections/" + card.section.pk 
             
             //push all the necessary data for History compoment
-            //todo change name to title of the section 
             historyList.push({
                 url: origin,
                 name: card.section.name,
