@@ -37,12 +37,14 @@ function App() {
 	const navigate = useNavigate();
 	useEffect(() => {
 		const getDefualt = async () => {
-			const respond = await fetch("api/sections/default/");
+			const respond = await fetch("/api/sections/default/");
+			console.log("defualt catch", respond)
 			const data = await respond.json();
 			//setSection({ url: data.url });
 			navigate("/sections/" + data.url.slice(-2));
 		};
-		getDefualt();
+        if(window.location.pathname === "/")
+			getDefualt();
 	}, []);
 
 	return (

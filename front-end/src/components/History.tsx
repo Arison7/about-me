@@ -16,8 +16,12 @@ interface IProps{
 const reBuildHistory = async (setHistoryList : React.Dispatch<React.SetStateAction<IProps['historyList']>>) : Promise<void> => {
     console.log("rebuilding history", window.location.pathname);
     const getSection = async () => {
-        const res = await fetch("/api" + window.location.pathname)
+        if(window.location.pathname === "/")
+            return
+        const res = await fetch("/api" + window.location.pathname + "/history")
+        console.log(res)
         const data = await res.json()
+        setHistoryList(data)
         console.log(data)
         
         
@@ -33,8 +37,9 @@ const History : React.FC<IProps> = ({historyList,setHistoryList}) => {
     const navigate = useNavigate()
 
 
-	useMemo(()=>{
+	useMemo(async ()=>{
 		addEventListener("popstate", () => {reBuildHistory(setHistoryList)});
+        await reBuildHistory(setHistoryList);
 	},[])
 
     //kept in order to display InfoPopUp

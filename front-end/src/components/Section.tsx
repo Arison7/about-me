@@ -52,6 +52,11 @@ const Section : React.FC<IProps> = ( {setHistoryList}) => {
             ?and in production react is hosted in template thus is on the same host as API
             */ 
             const res = await fetch('/api/sections/' + pk + '/')
+            //most likely to happen when user inputed link doesn't include pk
+            if(res.status != 200){
+                navigate("/")
+                return;
+            }
             const data = await res.json(); 
             //maps data to desired format
             //!since data is fetched without types assertion the whole operation
