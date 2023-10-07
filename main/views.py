@@ -32,7 +32,7 @@ class SectionViewSet(viewsets.ModelViewSet):
 
     @action(detail=False,methods=['GET'], url_path="default")
     def get_default(self, request, *args, **kwargs):
-        serializer = SectionInfoSerializer(Section.objects.filter(is_defualt=True)[0])
+        serializer = SectionInfoSerializer(Section.objects.filter(is_defualt=True)[0],context={'request': request})
         return Response(serializer.data)
     
 

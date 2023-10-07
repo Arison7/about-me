@@ -27,27 +27,23 @@ body {
 }
 
 .title {
-  position: absolute;
-  top: 2%;
+  position: relative;
   color: #ffe3c9;
   font-family: flash, roboto;
-  font-weight: bold;
-  font-size: 4rem;
+  font-size: 5rem;
   text-transform: capitalize;
   opacity: 0.8;
   text-shadow: 2px 5px black;
+  text-align: center;
+  padding: 8vh 0;
 }
 
 .section {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .cards-list {
-  position: absolute;
-  top: 20%;
   width: 100%;
   padding: 0 5%;
   list-style: none;
