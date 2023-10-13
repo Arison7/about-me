@@ -3,10 +3,7 @@ import {IState as Props} from "../App";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 interface IProps{
-    //section: Props['section'],
-   // setSection: React.Dispatch<React.SetStateAction<IProps['section']>>,
     setHistoryList: React.Dispatch<React.SetStateAction<Props['historyList']>>,
-    //setArticle : React.Dispatch<React.SetStateAction<Props['article']>>
 }
 interface IState{
     card:{
