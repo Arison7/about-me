@@ -21,7 +21,7 @@ const reBuildHistory = async (
 		//there is no history for a root page
 		if (window.location.pathname === "/") return;
 		//fetch data from backend
-		const res = await fetch("/api" + window.location.pathname + "/history");
+		const res = await fetch("/api" + window.location.pathname + "/history/");
 		//cast data to json
 		const data = await res.json();
 		//data on a backend is prepared in a way to fit the state perfectly
