@@ -51,7 +51,6 @@ const History: React.FC<IProps> = ({ historyList, setHistoryList }) => {
 	//string to be displayed in the InfoPopUp or nothing if the InfoPopUp isn't visible
 	const [hoveredObject, setHoveredObject] = useState<string | null>(null);
 
-	//todo make all of them dark and remove the smoke on hover
 	//updates mouse position and set the hoverobjected while the mouse is hovering over desired element
 	const handleMouseHover = (
 		e: React.MouseEvent<HTMLDivElement>,
