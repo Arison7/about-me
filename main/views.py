@@ -51,12 +51,14 @@ class ArticleViewSet(viewsets.ModelViewSet):
     def get_history(self,request,*args,**kwargs):
         return build_history(self,request,*args,**kwargs)
 
+#helper function to build history for both articles and sections
 def build_history(self,request,*args,**kwargs):
     history = []
     obj = self.get_object()
     recursive_history(obj.origin,history,request)
     return Response(reversed(history))
 
+#recursively calls itself to build history from current page to root page AKA the default page
 def recursive_history(card,history,request):
     if card == None:
         return

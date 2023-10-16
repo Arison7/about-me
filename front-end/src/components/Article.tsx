@@ -47,9 +47,11 @@ const Article : React.FC = () => {
         }
         getCurrentArticle();
     },[pk])
-
-    //todo support images
-    //! awful solution and only temporary one till i do my own markdown translator
+    /*
+    ? well that was a bigger project than I anticipated and in the end I don't think I am going to
+    ? to use this as foundation for my portfolio, thus the solution will remain as it is, although
+    ? I am aware of security issues that come with it.
+    */
     if(currentArticle.name === "Dashboard"){
         return (<div className='article-container'>
             <h1 className='title-article'>{currentArticle.name}</h1>
